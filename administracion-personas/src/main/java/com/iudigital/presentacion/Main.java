@@ -595,7 +595,7 @@ public class Main extends javax.swing.JFrame {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
 
         if (txtTipe.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Digite el tipo de identificacion");
+            JOptionPane.showMessageDialog(null, "Digite el id del tipo de identificacion presente en la lista");
             txtTipe.requestFocus();
             return;
         }
@@ -619,13 +619,13 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (txtEstado.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Digite el estado");
+            JOptionPane.showMessageDialog(null, "Digite el id del estado civil presente en la lista");
             txtEstado.requestFocus();
             return;
         }
 
         if (txtSex.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Digite el sexo");
+            JOptionPane.showMessageDialog(null, "Digite el id del sexo presente en la lista");
             txtSex.requestFocus();
             return;
         }
