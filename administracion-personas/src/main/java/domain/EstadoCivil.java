@@ -1,10 +1,16 @@
-
 package domain;
 
+public class EstadoCivil {
 
-public class Tipo {
     private int id;
     private String nombre;
+
+    public EstadoCivil() {
+    }
+
+    public EstadoCivil(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;
@@ -22,8 +28,9 @@ public class Tipo {
         this.nombre = nombre;
     }
 
-   @Override
+    @Override
     public String toString() {
         return id + " " +nombre;
     }
 }
+ 

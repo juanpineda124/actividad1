@@ -1,7 +1,7 @@
 package data;
 
 
-import domain.Sex;
+import domain.Sexo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 import util.ConnectionUtil;
 
-public class SexDao {
-    private static final String GET_SEXO = "select * from sexo"; 
+public class SexoDao {
+    private static final String GET_SEXO = "select * from sexos"; 
     
-    public List<Sex> obtenerSexo() throws SQLException {
+    public List<Sexo> obtenerSexo() throws SQLException {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<Sex> sexs = new ArrayList<>();
+        List<Sexo> sexs = new ArrayList<>();
 
         try {
 
@@ -27,7 +27,7 @@ public class SexDao {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Sex sexo = new Sex();
+                Sexo sexo = new Sexo();
                 sexo.setId(resultSet.getInt("id"));
                 sexo.setNombre(resultSet.getString("nombre"));
                 sexs.add(sexo);

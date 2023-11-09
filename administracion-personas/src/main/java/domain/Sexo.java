@@ -1,8 +1,15 @@
 package domain;
 
-public class Sex {
+public class Sexo {
     private int id;
     private String nombre;
+    
+     public Sexo() {
+    }
+     
+    public Sexo(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;

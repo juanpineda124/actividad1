@@ -2,6 +2,7 @@ package com.iudigital.presentacion;
 
 import controller.FuncionarioController;
 import domain.Funcionario;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Scanner;
 

@@ -306,7 +306,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Tipo&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;domain.TipoIdentificacion&gt;"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbxEstado">
@@ -316,7 +316,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Estado&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;domain.EstadoCivil&gt;"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbxSex">
@@ -326,7 +326,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Sex&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;domain.Sexo&gt;"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -420,6 +420,8 @@
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="txtTipeEdit" min="-2" pref="142" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtNombreT" min="-2" pref="115" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="lblSexEdit" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
@@ -498,6 +500,7 @@
                                   <Component id="txtTipeEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblSexEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtSexEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNombreT" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="btnActualizar" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -629,6 +632,8 @@
                 <Component class="javax.swing.JTextField" name="txtEstadoEdit">
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtSexEdit">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtNombreT">
                 </Component>
               </SubComponents>
             </Container>

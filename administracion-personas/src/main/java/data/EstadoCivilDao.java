@@ -1,6 +1,7 @@
 package data;
 
-import domain.Tipo;
+
+import domain.EstadoCivil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,31 +10,30 @@ import java.util.ArrayList;
 import java.util.List;
 import util.ConnectionUtil;
 
-
-public class TipoDao {
-    private static final String GET_TIPOIDENTIFICACION = "select * from tipoIdentificacion"; 
+public class EstadoCivilDao {
+     private static final String GET_ESTADICIVIL = "select * from estados_Civiles"; 
     
-    public List<Tipo> obtenerTipoIdentificacion() throws SQLException {
+    public List<EstadoCivil> obtenerEstadoCivil() throws SQLException {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<Tipo> tipos = new ArrayList<>();
+        List<EstadoCivil> estados = new ArrayList<>();
 
         try {
 
             connection = ConnectionUtil.getConnection();
-            preparedStatement = connection.prepareStatement(GET_TIPOIDENTIFICACION);
+            preparedStatement = connection.prepareStatement(GET_ESTADICIVIL);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Tipo tipo = new Tipo();
-                tipo.setId(resultSet.getInt("id"));
-                tipo.setNombre(resultSet.getString("nombre"));
-                tipos.add(tipo);
+                EstadoCivil estado = new EstadoCivil();
+                estado.setId(resultSet.getInt("id"));
+                estado.setNombre(resultSet.getString("nombre"));
+                estados.add(estado);
             }
 
-            return tipos;
+            return estados;
         } finally {
             if (connection != null){
                 connection.close();
@@ -47,5 +47,5 @@ public class TipoDao {
                 resultSet.close();
             }
         }
-    }
+    } 
 }

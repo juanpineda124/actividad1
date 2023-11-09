@@ -14,17 +14,15 @@ public class FuncionarioDao {
     private static final String GET_FUNCIONARIOS = "select * from funcionarios";
 
     private static final String CREATE_FUNCIONARIO = "INSERT INTO funcionarios "
-            + "(tipoIdentificacion_id, numeroIdentificacion, nombres, apellidos, estadoCivil_id, sexo_id, direccion, telefono, fechaNacimiento) "
+            + "(tipo_identificacion_id, numero_identificacion, nombres, apellidos, estado_civil_id, sexo_id, direccion, telefono, fecha_nacimiento) "
             + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String GET_FUNCIONARIO_BY_ID = "selec * from funcionarios where id = ?";
 
-    private static final String UPDATE_FUNCIONARIO =  "update funcionarios set tipoIdentificacion_id = ?,"
-           + "numeroIdentificacion = ?, nombres = ?, apellidos = ?, estadoCivil_id = ?, sexo_id = ?," 
-           + "direccion = ?, telefono = ?, fechaNacimiento = ? where id = ?";
+    private static final String UPDATE_FUNCIONARIO =  "update funcionarios set tipo_identificacion_id = ?,"
+           + "numero_identificacion = ?, nombres = ?, apellidos = ?, estado_Civil_id = ?, sexo_id = ?," 
+           + "direccion = ?, telefono = ?, fecha_nacimiento = ? where id = ?";
     
-   
-
     private static final String DELETE_FUNCIONARIO = "delete from funcionarios where id = ? ";
 
     public List<Funcionario> obtenerFuncionarios() throws SQLException {
@@ -43,15 +41,15 @@ public class FuncionarioDao {
 
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId(resultSet.getInt("id"));
-                funcionario.setTipoIdentificacion_id(resultSet.getShort("tipoIdentificacion_id"));
-                funcionario.setNumeroIdentificacion(resultSet.getString("numeroIdentificacion"));
+                funcionario.setTipoIdentificacion_id(resultSet.getShort("tipo_identificacion_id"));
+                funcionario.setNumeroIdentificacion(resultSet.getString("numero_identificacion"));
                 funcionario.setNombres(resultSet.getString("nombres"));
                 funcionario.setApellidos(resultSet.getString("apellidos"));
-                funcionario.setEstadoCivil_id(resultSet.getShort("estadoCivil_id"));
+                funcionario.setEstadoCivil_id(resultSet.getShort("estado_civil_id"));
                 funcionario.setSexo_id(resultSet.getShort("sexo_id"));
                 funcionario.setDireccion(resultSet.getString("direccion"));
                 funcionario.setTelefono(resultSet.getString("telefono"));
-                funcionario.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
+                funcionario.setFechaNacimiento(resultSet.getString("fecha_nacimiento"));
                 funcionarios.add(funcionario);
             }
 
@@ -121,15 +119,15 @@ public class FuncionarioDao {
 
                 funcionario = new Funcionario();
                 funcionario.setId(resultSet.getInt("id"));
-                funcionario.setTipoIdentificacion_id(resultSet.getShort("tipoIdentificacion"));
-                funcionario.setNumeroIdentificacion(resultSet.getString("numeroIdentificacion"));
+                funcionario.setTipoIdentificacion_id(resultSet.getShort("tipo_identificacion"));
+                funcionario.setNumeroIdentificacion(resultSet.getString("numero_identificacion"));
                 funcionario.setNombres(resultSet.getString("nombres"));
                 funcionario.setApellidos(resultSet.getString("apellidos"));
-                funcionario.setEstadoCivil_id(resultSet.getShort("estadoCivil"));
+                funcionario.setEstadoCivil_id(resultSet.getShort("estado_civil"));
                 funcionario.setSexo_id(resultSet.getShort("sexo"));
                 funcionario.setDireccion(resultSet.getString("direccion"));
                 funcionario.setTelefono(resultSet.getString("telefono"));
-                funcionario.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
+                funcionario.setFechaNacimiento(resultSet.getString("fecha_nacimiento"));
             }
 
             return funcionario;

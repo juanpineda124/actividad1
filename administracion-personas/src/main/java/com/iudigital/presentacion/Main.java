@@ -4,14 +4,15 @@
  */
 package com.iudigital.presentacion;
 
-import controller.EstadoController;
+import controller.EstadoCivilController;
 import controller.FuncionarioController;
-import controller.SexController;
-import controller.TipoController;
-import domain.Estado;
+import controller.SexoController;
+import controller.TipoIdentificacionController;
+import domain.EstadoCivil;
 import domain.Funcionario;
-import domain.Sex;
-import domain.Tipo;
+import domain.Sexo;
+import domain.TipoIdentificacion;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,11 +25,11 @@ import javax.swing.table.DefaultTableModel;
 public class Main extends javax.swing.JFrame {
 
     private final FuncionarioController funcionarioController;
-    private final SexController sexController;
-    private final TipoController tipoController;
-    private final EstadoController estadoController;
-    private final String[] COLUMNS = {"ID", "TIPOIDENTIFICACION_id", "NUMEROIDENTIFICACION", "NOMBRES",
-        "APELLIDOS", "ESTADOCIVIL_ID", "SEXO_ID", "DIRECCION", "TELEFONO", "FECHANACIMIENTO"};
+    private final SexoController sexoController;
+    private final TipoIdentificacionController tipoIdentificacionController;
+    private final EstadoCivilController estadoCivilController;
+    private final String[] COLUMNS = {"ID", "TIPO_IDENTIFICACION_id", "NUMERO_IDENTIFICACION", "NOMBRES",
+        "APELLIDOS", "ESTADO_CIVIL_ID", "SEXO_ID", "DIRECCION", "TELEFONO", "FECHA_NACIMIENTO"};
     private final static String SELECCIONE = "--SELECCIONE--";
     private final static String SEXO = "--SEXO--";
     private final static String TIPO = "--TIPO--";
@@ -38,9 +39,9 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         txtFuncId.setEditable(false);
         funcionarioController = new FuncionarioController();
-        sexController = new SexController();
-        tipoController = new TipoController();
-        estadoController = new EstadoController();
+        sexoController = new SexoController();
+        tipoIdentificacionController = new TipoIdentificacionController();
+        estadoCivilController = new EstadoCivilController();
         listFuncs();
         listEstado();
         listSexo();
@@ -94,13 +95,13 @@ public class Main extends javax.swing.JFrame {
     private void listEstado() {
 
         cbxEstado.removeAllItems();
-        Estado estado1 = new Estado();
-        estado1.setNombre(ESTADO);
-        cbxEstado.addItem(estado1);
+        EstadoCivil estadoCivil1 = new EstadoCivil();
+        estadoCivil1.setNombre(ESTADO);
+        cbxEstado.addItem(estadoCivil1);
         try {
-            List<Estado> estados = estadoController.obtenerEstadoCivil();
-            for (Estado estado : estados) {
-                cbxEstado.addItem(estado);
+            List<EstadoCivil> estadosCiviles = estadoCivilController.obtenerEstadoCivil();
+            for (EstadoCivil estadoCivil : estadosCiviles) {
+                cbxEstado.addItem(estadoCivil);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -111,13 +112,13 @@ public class Main extends javax.swing.JFrame {
     private void listSexo() {
 
         cbxSex.removeAllItems();
-        Sex sex1 = new Sex();
+        Sexo sex1 = new Sexo();
         sex1.setNombre(SEXO);
         cbxSex.addItem(sex1);
 
         try {
-            List<Sex> sexos = sexController.obtenerSexo();
-            for (Sex sexo : sexos) {
+            List<Sexo> sexos = sexoController.obtenerSexo();
+            for (Sexo sexo : sexos) {
                 cbxSex.addItem(sexo);
             }
         } catch (SQLException ex) {
@@ -129,14 +130,14 @@ public class Main extends javax.swing.JFrame {
     private void listTipo() {
 
         cbxTipe.removeAllItems();
-        Tipo tipo1 = new Tipo();
-        tipo1.setNombre(TIPO);
-        cbxTipe.addItem(tipo1);
+        TipoIdentificacion tipoIdentificacion1 = new TipoIdentificacion();
+        tipoIdentificacion1.setNombre(TIPO);
+        cbxTipe.addItem(tipoIdentificacion1);
 
         try {
-            List<Tipo> tipos = tipoController.obtenerTipoIdentificacion();
-            for (Tipo tipo : tipos) {
-                cbxTipe.addItem(tipo);
+            List<TipoIdentificacion> tiposIdentificaciones = tipoIdentificacionController.obtenerTipoIdentificacion();
+            for (TipoIdentificacion tipoIdentificacion : tiposIdentificaciones) {
+                cbxTipe.addItem(tipoIdentificacion);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -150,6 +151,7 @@ public class Main extends javax.swing.JFrame {
             if (seledtedFun.getNombres().equals(SELECCIONE)) {
                 txtFuncId.setText("");
                 txtTipeEdit.setText("");
+                txtNombreT.setText("");
                 txtNumberEdit.setText("");
                 txtNombresEdit.setText("");
                 txtApellidosEdit.setText("");
@@ -236,6 +238,7 @@ public class Main extends javax.swing.JFrame {
         txtNumberEdit = new javax.swing.JTextField();
         txtEstadoEdit = new javax.swing.JTextField();
         txtSexEdit = new javax.swing.JTextField();
+        txtNombreT = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -483,6 +486,8 @@ public class Main extends javax.swing.JFrame {
                                     .addGap(37, 37, 37))
                                 .addGroup(jPUpdateFuncLayout.createSequentialGroup()
                                     .addComponent(txtTipeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNombreT, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblSexEdit)
                                     .addGap(62, 62, 62)))
@@ -540,7 +545,8 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(lblTipeEdit)
                         .addComponent(txtTipeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblSexEdit)
-                        .addComponent(txtSexEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSexEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnActualizar))
                 .addGap(18, 18, 18)
                 .addGroup(jPUpdateFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -851,10 +857,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JComboBox<Estado> cbxEstado;
+    private javax.swing.JComboBox<domain.EstadoCivil> cbxEstado;
     private javax.swing.JComboBox<Funcionario> cbxFuncs;
-    private javax.swing.JComboBox<Sex> cbxSex;
-    private javax.swing.JComboBox<Tipo> cbxTipe;
+    private javax.swing.JComboBox<domain.Sexo> cbxSex;
+    private javax.swing.JComboBox<domain.TipoIdentificacion> cbxTipe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPFunc;
     private javax.swing.JPanel jPFunc1;
@@ -895,6 +901,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txtFechaEdit;
     private javax.swing.JTextField txtFuncId;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreT;
     private javax.swing.JTextField txtNombresEdit;
     private javax.swing.JTextField txtNumber;
     private javax.swing.JTextField txtNumberEdit;

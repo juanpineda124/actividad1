@@ -1,7 +1,6 @@
 package data;
 
-
-import domain.Estado;
+import domain.TipoIdentificacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,30 +9,31 @@ import java.util.ArrayList;
 import java.util.List;
 import util.ConnectionUtil;
 
-public class EstadoDao {
-     private static final String GET_ESTADICIVIL = "select * from estadoCivil"; 
+
+public class TiposIdentificacionDao {
+    private static final String GET_TIPOIDENTIFICACION = "select * from tipos_Identificaciones"; 
     
-    public List<Estado> obtenerEstadoCivil() throws SQLException {
+    public List<TipoIdentificacion> obtenerTipoIdentificacion() throws SQLException {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<Estado> estados = new ArrayList<>();
+        List<TipoIdentificacion> tipos = new ArrayList<>();
 
         try {
 
             connection = ConnectionUtil.getConnection();
-            preparedStatement = connection.prepareStatement(GET_ESTADICIVIL);
+            preparedStatement = connection.prepareStatement(GET_TIPOIDENTIFICACION);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Estado estado = new Estado();
-                estado.setId(resultSet.getInt("id"));
-                estado.setNombre(resultSet.getString("nombre"));
-                estados.add(estado);
+                TipoIdentificacion tipo = new TipoIdentificacion();
+                tipo.setId(resultSet.getInt("id"));
+                tipo.setNombre(resultSet.getString("nombre"));
+                tipos.add(tipo);
             }
 
-            return estados;
+            return tipos;
         } finally {
             if (connection != null){
                 connection.close();
@@ -47,5 +47,5 @@ public class EstadoDao {
                 resultSet.close();
             }
         }
-    } 
+    }
 }
